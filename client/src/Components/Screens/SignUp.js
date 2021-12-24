@@ -1,66 +1,110 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, CardActions } from '@mui/material';
 import TextField from "@material-ui/core/TextField";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
 import '../CSS/authentication.css'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 const SignUp = () => {
-    const Item = styled(Paper)(({ theme }) => ({
-        ...theme.typography.body2,
-        padding: theme.spacing(1),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-    }));
 
-    const [name,setName]=useState("")
+    const navigate = useNavigate();
+
+    const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
+    toast.configure();
+
+    const PostData = () => {
+        if (!/^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
+            toast('Invalid Email', { position: toast.POSITION.TOP_RIGHT })
+            return
+        }
+        fetch("/signup", {
+            method: "Post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name,
+                email,
+                password
+            })
+        }).then(res => res.json())
+            .then(data => {
+                if (data.error) {
+                    console.log(data.error)
+                    toast(data.error,
+                        { position: toast.POSITION.TOP_RIGHT })
+                } else {
+                    console.log(data.message)
+                    toast(data.message,
+                        { position: toast.POSITION.TOP_RIGHT })
+                    navigate('/signin')
+                }
+            }).catch(err => {
+                console.log(err)
+            })
+    }
+
+
     return (
-        <Box sx={{ flexGrow: 1 }} className="signinpage">
+        <Box component="form" sx={{ flexGrow: 1 }} className="signinpage">
             <Grid container columnSpacing={{ xs: 0, sm: 2, md: 1 }}>
                 <Grid item xs={12} sm={6} md={6}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </Grid>
-                <Grid item xs={12} sm={6} md={4}>
+                <Grid item xs={12} sm={6} md={5}>
                     <Paper elevation={8} className="signincard">
-                        <Item>
-                            <h2>Sign Up</h2>
-                            <TextField
-                                style={{ width: "80%" }}
-                                required
-                                type="text"
-                                placeholder="Name"
-                            />
-                            <TextField
-                                style={{ width: "80%" }}
-                                required
-                                type="email"
-                                placeholder="E-mail"
-                            />
-                            <TextField
-                                required
-                                style={{ width: "80%" }}
-                                type="password"
-                                placeholder="Password"
-                            />
-                            <CardActions className="buttons">
-                                <Button variant="contained" style={{ backgroundColor: "#000046", marginTop: "10px" }}>
-                                    Sign Up
-                                </Button>
-                            </CardActions>
-                            <CardActions className="buttons">
-                                <Button component={Link} to='/signin' size="small">Already Have an Account?</Button>
-                            </CardActions>
-                        </Item>
+                        {/* <Item> */}
+                        <h2 style={{ margin: "auto", marginTop: "20px" }}>Sign Up</h2>
+                        <TextField
+                            style={{ width: "80%", marginLeft: "10%" }}
+                            required
+                            type="text"
+                            placeholder="Name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <TextField
+                            style={{ width: "80%", marginLeft: "10%" }}
+                            required
+                            type="email"
+                            placeholder="E-mail"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <TextField
+                            required
+                            style={{ width: "80%", marginLeft: "10%" }}
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <CardActions className="buttons">
+                            <Button
+                                variant="contained"
+                                style={{ backgroundColor: "#000046", marginTop: "10px" }}
+                                onClick={() => PostData()}
+                            >
+                                Sign Up
+                            </Button>
+                        </CardActions>
+                        <CardActions className="buttons">
+                            <Button component={Link} to='/signin' size="small">Already Have an Account?</Button>
+                        </CardActions>
+                        {/* </Item> */}
                     </Paper>
                 </Grid>
             </Grid>
-        </Box>)
+        </Box>
+    )
 }
 
 export default SignUp;

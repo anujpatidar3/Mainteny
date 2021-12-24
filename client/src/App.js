@@ -21,14 +21,13 @@ function App() {
       <Container fixed>
         <Routes>
           <Route exact path='/' element={<Home />}></Route>
-          <Route path='/signup' element={<SignUp />}></Route>
+          <Route exact path='/signup' element={<SignUp />}></Route>
           <Route exact path='/signin' element={<SignIn />}></Route>
           <Route exact path='/mystudents' element={<MyStudents />}></Route>
           <Route exact path='/createstudent' element={<CreateStudent />}></Route>
           <Route exact path='/myStudents/:studentid' element={<StudentProfile />}></Route>
         </Routes>
       </Container>
-
     </BrowserRouter>
   );
 }

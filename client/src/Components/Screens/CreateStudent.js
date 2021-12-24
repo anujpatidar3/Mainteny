@@ -29,13 +29,13 @@ const CreateStudent = () => {
     const [ML, setML] = useState(false)
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <Grid container  style={{justifyContent:"center",marginTop:"40px"}}>
+        <Box sx={{ flexGrow: 1 }} >
+            <Grid container style={{ justifyContent: "center", marginTop: "40px" }}>
                 <Grid item xs={12} md={6}>
                     <Paper elevation={8} >
                         <Item>
                             <TextField
-                                style={{ width: "100%" }}
+                                style={{ width: "80%", margin: "auto" }}
                                 required
                                 type="text"
                                 placeholder="Name"
@@ -43,7 +43,7 @@ const CreateStudent = () => {
                                 onChange={(e) => setName(e.target.value)}
                             />
                             <TextField
-                                style={{ width: "100%" }}
+                                style={{ width: "80%", margin: "auto" }}
                                 required
                                 type="text"
                                 placeholder="Roll Number"
@@ -52,7 +52,7 @@ const CreateStudent = () => {
                             />
                         </Item>
                         <Item>
-                            <FormGroup>
+                            <FormGroup style={{ width: "80%", margin: "auto" }}>
                                 <FormControlLabel control={<Checkbox checked={maths} onChange={(e) => setMaths(e.target.checked)} />} label="Maths" />
                                 <FormControlLabel control={<Checkbox checked={DBMS} onChange={(e) => setDBMS(e.target.checked)} />} label="DBMS" />
                                 <FormControlLabel control={<Checkbox checked={dataStructues} onChange={(e) => setDataStructues(e.target.checked)} />} label="Data Structures" />

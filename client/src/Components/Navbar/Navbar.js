@@ -5,28 +5,28 @@ import logo from '../../Images/Logo.png'
 const NavBar = () => {
     const links = [{
         "href": "/",
-        "label": "Home",
+        "label": "HOME",
         "background": false,
     },
 
     {
         "href": "/mystudents",
-        "label": "Students List",
+        "label": "MY STUDENTS",
         "background": false,
     },
     {
         "href": "/createstudent",
-        "label": "Add Student",
+        "label": "ADD STUDENT",
         "background": false,
     },
     {
         "href": "/signin",
-        "label": "Login",
+        "label": "LOGIN",
         "background": false,
     },
     {
         "href": "/signup",
-        "label": "Register",
+        "label": "REGISTER",
         "background": true,
     },
     ]
