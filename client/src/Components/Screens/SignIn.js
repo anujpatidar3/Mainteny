@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from 'react';
+import { UserContext } from '../../App'
 import { Link,useNavigate } from 'react-router-dom';
 import { Button, CardActions } from '@mui/material';
 import TextField from "@material-ui/core/TextField";
@@ -10,10 +11,11 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const SignIn = () => {
+    const { state, dispatch } = useContext(UserContext)
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-
-    const navigate = useNavigate();
 
     toast.configure();
 
@@ -40,6 +42,7 @@ const SignIn = () => {
                 } else {
                     localStorage.setItem("jwt", JSON.stringify(data.token))
                     localStorage.setItem("user", JSON.stringify(data.user))
+                    dispatch({ type: "USER", payload: data.user })
                     toast("Signed In Successfully",
                         { position: toast.POSITION.TOP_RIGHT })
                     navigate('/')
@@ -84,7 +87,7 @@ const SignIn = () => {
                             </Button>
                         </CardActions>
                         <CardActions className="buttons">
-                            <Button component={Link} to='/signup' size="small">New User?</Button>
+                            <Button component={Link} to='/signup' size="medium">Register?</Button>
                         </CardActions>
                     </Paper>
                 </Grid>
