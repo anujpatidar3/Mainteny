@@ -62,9 +62,9 @@ const NavBar = () => {
     };
 
     return (
-        <AppBar position="static" style={{ backgroundColor: "rgba(0,0,70)" }}>
+        <AppBar position="static" style={{ backgroundColor: "rgba(0,0,70)" }} >
             <CssBaseline />
-            <Container fixed>
+            <Container fixed >
                 <Toolbar disableGutters>
                     <Typography
                         variant="h6"
@@ -157,13 +157,14 @@ const NavBar = () => {
                         }
                     </Box>
                     <Typography
+                        style={{ float: "right",position:"absolute",left:"87%" }}
                         variant="h6"
                         noWrap
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
                     >
                         <Link to={state ? "/" : "/signin"}>
-                            <img src={logo} alt="University" style={{ width: "20%", marginTop: "7px", borderRadius: "6px" }} />
+                            <img src={logo} alt="University" style={{ width: "80%", marginTop: "9px", borderRadius: "6px" }} />
                         </Link>
                     </Typography>
                     {

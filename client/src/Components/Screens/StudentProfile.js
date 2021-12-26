@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router";
 import { Button, CardActions } from '@mui/material';
 import TextField from "@material-ui/core/TextField";
@@ -61,7 +61,7 @@ const StudentProfile = () => {
         setOOPS(data.OOPS)
         setML(data.ML)
     }, [data])
-    
+
     const navigate = useNavigate()
 
     const updateData = () => {
@@ -96,6 +96,33 @@ const StudentProfile = () => {
             }).catch(err => {
                 console.log(err)
             })
+
+    }
+
+    const deleteStudent = () => {
+        fetch("/deletestudent", {
+            method: "delete",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("jwt")
+            },
+            body: JSON.stringify({
+                studentid,
+            })
+        }).then(res => res.json())
+            .then(data => {
+                if (data.error) {
+                    toast(data.error,
+                        { position: toast.POSITION.TOP_RIGHT })
+                } else {
+                    toast("Student Deleted Succesfully",
+                        { position: toast.POSITION.TOP_RIGHT })
+                    navigate('/mystudents')
+                }
+            }).catch(err => {
+                console.log(err)
+            })
+
 
     }
 
@@ -134,7 +161,13 @@ const StudentProfile = () => {
                                 onClick={() => updateData()}
                                 variant="contained"
                                 style={{ backgroundColor: "#000046", marginTop: "10px" }}>
-                                Edit
+                                EDIT
+                            </Button>
+                            <Button
+                                onClick={() => deleteStudent()}
+                                variant="contained"
+                                style={{ backgroundColor: "#FB1239", marginTop: "10px" }}>
+                                DELETE
                             </Button>
                         </CardActions>
                     </Paper>

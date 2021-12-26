@@ -80,14 +80,23 @@ router.put('/updatestudent', requireLogin, async (req, res) => {
     }
 })
 
-module.exports = router;
+router.delete('/deletestudent', requireLogin, async (req,res)=>{
+    try {
+        Student.findOne({ _id: req.body.studentid })
+          .exec((err,student)=>{
+            if (err || !student) {
+                return res.status(422).json({ error: err })
+            }else{
+                let result = student.remove()
+                res.json(result)
+            }
+          })
 
-            // { $set: { studentName: req.body.studentName } },
-            // { $set: { rollNumber: req.body.rollNumber } },
-            // { $set: { DBMS: req.body.DBMS } },
-            // { $set: { dataStructure: req.body.dataStructure } },
-            // { $set: { algorithms: req.body.algorithms } },
-            // { $set: { maths: req.body.maths } },
-            // { $set: { OOPS: req.body.OOPS } },
-            // { $set: { AI: req.body.AI } },
-            // { $set: { ML: req.body.ML } },
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json("Error")
+    }
+})
+
+module.exports = router;
