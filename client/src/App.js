@@ -1,6 +1,6 @@
 import React, { useEffect, createContext, useReducer, useContext } from "react"
 import Navbar from './Components/Navbar/Navbar'
-import { BrowserRouter, Route, Routes, useNavigate, useLocation } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
 import Home from "./Components/Screens/Home";
 import SignIn from "./Components/Screens/SignIn";
 import SignUp from "./Components/Screens/SignUp";
@@ -16,7 +16,6 @@ export const UserContext = createContext()
 const Routing = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useContext(UserContext)
-  const location = useLocation();
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"))

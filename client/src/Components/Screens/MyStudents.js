@@ -79,9 +79,8 @@ const MyStudents = () => {
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((row) => {
                                 const studentId=(row[1]._id)
-                                console.log(studentId)
                                 return (
-                                    <TableRow component={Link} to={'/mystudents/'+studentId} hover={true} role="checkbox" tabIndex={-1} key={row.code}>
+                                    <TableRow component={Link} to={'/mystudents/'+studentId} hover={true} role="checkbox" tabIndex={-1} key={row.code} style={{textDecoration:"none"}}>
                                         {columns.map((column) => {
                                             const value = row[1][column.id];
                                             return (
