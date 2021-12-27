@@ -67,7 +67,7 @@ Users can log in using the email id and password.
 1. Open Terminal/Command Prompt.
 2. Change the current working directory to the location where you want the cloned directory.
 3. Copy the following command in the Terminal/Command Prompt to clone the project:
-#### `https://github.com/anujpatidar3/Mainteny.git`
+#### `git clone https://github.com/anujpatidar3/University-Admin.git`
 4. Change your current directory to the cloned directory.
 5. In the project directory, run: :
 #### `node app.js`
