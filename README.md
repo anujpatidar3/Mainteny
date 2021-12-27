@@ -63,6 +63,10 @@ Users can log in using the email id and password.
 * [Redux](https://github.com/reduxjs/redux "Redux"): It helps us to write applications that behave consistently, run in different environments (client, server, and native), and are easy to test.
 * [Javascript](https://devdocs.io/javascript/): It is a text-based programming language used both on the client-side and server-side that allows you to make web pages interactive.
 
+## DEPLOYMENT LINK
+[University Admin Application](https://universityadmin.herokuapp.com/)
+
+
 ## Setup Steps:
 1. Open Terminal/Command Prompt.
 2. Change the current working directory to the location where you want the cloned directory.
