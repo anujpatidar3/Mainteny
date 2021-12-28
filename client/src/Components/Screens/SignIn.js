@@ -56,7 +56,7 @@ const SignIn = () => {
     return (
         <Box sx={{ flexGrow: 1 }} className="signinpage">
             <Grid container spacing={{ xs: 0, sm: 2, md: 2 }}>
-                <Grid item xs={12} sm={6} md={6}>
+            <Grid item xs={12} sm={6} md={6} style={{fontWeight:"600",fontSize:"16px",fontFamily: "Lucida Console, Courier New, monospace"}}>
                     University Admin is a web application to help university admin’s maintain the data of students. The Admin has to create a User Profile then that user can add students with the subjects the student has opted to study. Then the Admin can later on see the list of students with the subjects he/she has chosen.
                     <br/>The Admin can edit the subjects in future too or delete a student’s data in case any student opts to drop out or change the subjects. The Web Application provides authentication and privacy capabilities to the user. All data of the user will be stored in an online database and will be protected so that no user without proper credentials can access it.
                 </Grid>
