@@ -44,7 +44,6 @@ router.post('/createstudent', requireLogin, async (req, res) => {
 router.get('/mystudents', requireLogin, async (req, res) => {
     try {
         let temp = await Student.find({ postedBy: req.user._id })
-        //     .populate("postedBy", "_id name")
         res.json(temp)
     } catch (error) {
         console.log(error)

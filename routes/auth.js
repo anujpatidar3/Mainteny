@@ -13,13 +13,13 @@ router.post('/signup', async (req, res) => {
         if (!email || !password || !name) {
             let result = { err: "Please add all the fields" }
             console.log((result))
-            return res.status(422).json(result)
+            return res.status(400).json(result)
         }
         let savedUser = await User.findOne({ email: email })
         if (savedUser) {
             let result = { err: "User Already Exists" }
             console.log((result))
-            return res.status(422).json(result)
+            return res.status(400).json(result)
         }
         let hashedPassword = await bcrypt.hash(password, 10)
         const user = new User({
@@ -29,12 +29,12 @@ router.post('/signup', async (req, res) => {
         })
         let result = await user.save()
         if (result) {
-            return res.status(422).json({ message: "User saved Succesfully" })
+            return res.status(200).json({ message: "User saved Succesfully" })
         }
     }
     catch (error) {
         console.log(error)
-        res.status(500).json("Error")
+        res.status(400).json("Error")
     }
 })
 
@@ -44,11 +44,11 @@ router.post('/signin', async (req, res) => {
         if (!email || !password) {
             let result = { err: "Please add all the fields" }
             console.log((result))
-            return res.status(422).json(result)
+            return res.status(400).json(result)
         }
         let savedUser = await User.findOne({ email: email })
         if (!savedUser) {
-            return res.status(422).json({ error: "Invalid Email or Password" })
+            return res.status(400).json({ error: "Invalid Email or Password" })
         }
         let doMatch = bcrypt.compare(password, savedUser.password)
         if (doMatch) {
@@ -56,12 +56,12 @@ router.post('/signin', async (req, res) => {
             const { _id, name, email } = savedUser;
             return res.json({ token, user: { _id, name, email } })
         } else {
-            res.status(422).json({ error: "Invalid Email ID or Password" })
+            res.status(400).json({ error: "Invalid Email ID or Password" })
         }
     }
     catch (error) {
         console.log(error)
-        res.status(500).json("Error")
+        res.status(400).json("Error")
     }
 })
 
