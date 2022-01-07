@@ -16,7 +16,7 @@ router.post('/createstudent', requireLogin, async (req, res) => {
             AI,
             ML } = req.body;
         if (!studentName || !rollNumber) {
-            return res.status(422).json({ error: "Please add all the fields" })
+            return res.status(400).json({ error: "Please add all the fields" })
         }
 
         req.user.password = undefined;
@@ -37,7 +37,7 @@ router.post('/createstudent', requireLogin, async (req, res) => {
     }
     catch (error) {
         console.log(error)
-        res.status(500).json("Error")
+        res.status(400).json("Error")
     }
 })
 
@@ -47,7 +47,7 @@ router.get('/mystudents', requireLogin, async (req, res) => {
         res.json(temp)
     } catch (error) {
         console.log(error)
-        res.status(500).json("Error")
+        res.status(400).json("Error")
     }
 })
 
@@ -57,7 +57,7 @@ router.get('/mystudents/:studentid', requireLogin, async (req, res) => {
         res.json(result)
     } catch (error) {
         console.log(error)
-        res.status(500).json("Error")
+        res.status(400).json("Error")
     }
 })
 
@@ -68,7 +68,7 @@ router.put('/updatestudent', requireLogin, async (req, res) => {
             { new: true },
             (err, result) => {
                 if (err) {
-                    return res.status(422).json({ err: "DATA CANNOT BE UPDATED" })
+                    return res.status(400).json({ err: "DATA CANNOT BE UPDATED" })
                 }
                 res.json(result)
             }
@@ -84,7 +84,7 @@ router.delete('/deletestudent', requireLogin, async (req,res)=>{
         Student.findOne({ _id: req.body.studentid })
           .exec((err,student)=>{
             if (err || !student) {
-                return res.status(422).json({ error: err })
+                return res.status(400).json({ error: err })
             }else{
                 let result = student.remove()
                 res.json(result)
@@ -94,7 +94,7 @@ router.delete('/deletestudent', requireLogin, async (req,res)=>{
         
     } catch (error) {
         console.log(error)
-        res.status(500).json("Error")
+        res.status(400).json("Error")
     }
 })
 
