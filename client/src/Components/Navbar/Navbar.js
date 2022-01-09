@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../Images/Logo.png'
 import { UserContext } from "../../App";
 import Container from '@mui/material/Container';
@@ -17,7 +17,7 @@ import { v4 as uuidv4 } from 'uuid';
 import '../CSS/navbar.css'
 
 const NavBar = () => {
-
+    const navigate = useNavigate();
     const { state, dispatch } = useContext(UserContext)
 
     const pages = [
@@ -114,10 +114,10 @@ const NavBar = () => {
                                             <MenuItem key={page.name} component={Link} to={page.link}
                                                 style={{ color: "rgba(0,0,70)" }}
                                                 onClick={() => {
+                                                    navigate('/signin')
                                                     dispatch({ type: "CLEAR" })
                                                     localStorage.clear()
                                                     handleCloseNavMenu()
-                                                    window.location.reload()
                                                 }}>
                                                 <Typography textAlign="center">{page.name}</Typography>
                                             </MenuItem> :
@@ -157,7 +157,7 @@ const NavBar = () => {
                         }
                     </Box>
                     <Typography
-                        style={{ float: "right",position:"absolute",left:"87%" }}
+                        style={{ float: "right", position: "absolute", left: "87%" }}
                         variant="h6"
                         noWrap
                         component="div"
@@ -176,11 +176,10 @@ const NavBar = () => {
                                         to={page.link}
                                         key={uuidv4()}
                                         onClick={() => {
-                                            dispatch({ type: "CLEAR" })
-                                            localStorage.clear()
-                                            handleCloseNavMenu()
-                                            window.location.reload()
-                                        }}
+                                            navigate('/signin')
+                                                    dispatch({ type: "CLEAR" })
+                                                    localStorage.clear()
+                                                    handleCloseNavMenu()                                        }}
                                         sx={{ my: 2, color: 'white', display: 'block' }}
                                     >
                                         {page.name}
